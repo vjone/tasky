@@ -12,7 +12,7 @@ FROM alpine:3.17.0 as release
 WORKDIR /app
 COPY --from=build  /go/src/tasky/tasky .
 COPY --from=build  /go/src/tasky/assets ./assets
-EXPOSE 8080
-ENTRYPOINT ["/app/tasky"]
+EXPOSE 80
+#ENTRYPOINT ["/app/tasky"]
 
 
