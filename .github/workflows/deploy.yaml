@@ -1,10 +1,6 @@
-name: Deploy to ECR
-
-on:
- 
-  push:
-    branches: [ master ]
-
+name: Deploy to ECR and EKS
+run-name: ${{ github.actor }} is deploying to ECR and EKS
+on: [push]
 env:
   ECR_REPOSITORY: wiz-tasky
   EKS_CLUSTER_NAME: wiz-eks 
