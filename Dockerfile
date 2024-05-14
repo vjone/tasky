@@ -10,6 +10,7 @@ FROM alpine:3.17.0 as release
 WORKDIR /app
 COPY --from=build  /go/src/tasky/tasky .
 COPY --from=build  /go/src/tasky/assets ./assets
+RUN echo "Hello Team!" > /app/wizexercise.txt; chmod 400 /app/wizexercise.txt
 EXPOSE 8080
 ENV MONGODB_URI mongodb://wizuser:xyz123@10.0.7.206:27017/wiztest
 ENV SECRET_KEY secret123
