@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: w-tasky
+  namespace: w-test
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: w-tasky
+  template:
+    metadata:
+      labels:
+        app: w-tasky
+    spec:
+      containers:
+        - name: wi-tasky
+          image: DOCKER_IMAGE
+          imagePullPolicy: Always
+          ports:
+            - name: tcp
+              containerPort: 8080
+      imagePullSecrets:
+        - name: ecrregcred
