@@ -50,6 +50,8 @@ jobs:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}        
         IMAGE_TAG: ${{ steps.commit.outputs.short }}
       run: |
+        kubectl delete secret ecrregcred --namespace w-test
+        kubectl create secret docker-registry ecrregcred --docker-server=609072110517.dkr.ecr.us-west-1.amazonaws.com --docker-username=AWS --docker-password=$(aws ecr get-login-password) --namespace=w-test
         sed -i.bak "s|DOCKER_IMAGE|$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG|g" k8s-manifests/w-deployment.yaml && \
         kubectl apply -f k8s-manifests/w-deployment.yaml
         kubectl apply -f k8s-manifests/w-service.yaml
